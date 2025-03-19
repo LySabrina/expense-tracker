@@ -1,3 +1,9 @@
+# Project
+
+Just a quick fun project to get familiar with TypeScript and React.
+Future implementation is using Java + Spring or Kotlin + Spring.
+![Demo project](./public/Quick_Demo.png)
+
 # Core Features
 
 ~~- Add a row~~
