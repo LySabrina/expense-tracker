@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+@theme {
+  --color-default-bg: #f7f5f2;
+  --color-dark-black: #272a29;
+  --color-table-header: #f7f2ef;
+  --color-table-row: #fefdf9;
+
+  --color-blue-btn:#7177ae
+}
