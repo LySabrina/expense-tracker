@@ -14,6 +14,7 @@ function Table({
   setCoords,
   selectedHeaders,
   setSelectedHeaders,
+  updateRemoveTag
 }) {
   const selectRow = (rowIndex: number) => {
     if (selectedRows.includes(rowIndex)) {
@@ -98,6 +99,7 @@ function Table({
                   colName={header.name}
                   updateTableRows={updateTableRows}
                   isSelected={selectedHeaders.includes(index)}
+                  updateRemoveTag={updateRemoveTag}
                 />
               );
             })}

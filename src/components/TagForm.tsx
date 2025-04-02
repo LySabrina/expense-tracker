@@ -1,10 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import { TAGS, addNewTag as addTag, removeTag } from "../constants/TAGS.js";
 
-function TagForm({ handleEnterKeyDown, editData, setIsEdit, value }) {
+function TagForm({
+  handleEnterKeyDown,
+  editData,
+  setIsEdit,
+  value,
+  updateRemoveTag,
+}) {
   const [newTag, setNewTag] = useState("");
   const menu = useRef(null);
-
+  console.log('TagForm.tsx', value)
   const addNewTag = (e) => {
     const key = e.key;
     if (key === "Enter") {
@@ -28,13 +34,13 @@ function TagForm({ handleEnterKeyDown, editData, setIsEdit, value }) {
 
   const remove = (e, tagName) => {
     e.stopPropagation();
-    
-    
     if (!TAGS.includes(tagName.toUpperCase())) {
       alert("Error in removing non-existing tag");
       return;
     }
     removeTag(tagName);
+    updateRemoveTag(tagName);
+    setIsEdit(false);
   };
 
   const editNewTag = (e) => {
@@ -46,11 +52,15 @@ function TagForm({ handleEnterKeyDown, editData, setIsEdit, value }) {
     <div className="bg-blue-200 flex flex-col">
       <select
         value={value}
-        onChange={editData}
+        onChange={(e) => {
+          console.log('change?')
+          editData(e);
+        }}
         onKeyDown={handleEnterKeyDown}
         ref={menu}
         size={4}
-      >
+      > 
+        <option value="" disabled>Choose Tag Value:</option>
         {TAGS.map((element) => (
           <option
             value={element}
@@ -68,6 +78,7 @@ function TagForm({ handleEnterKeyDown, editData, setIsEdit, value }) {
         value={newTag}
         onChange={editNewTag}
         onKeyDown={addNewTag}
+        placeholder="Enter new tag name then press Enter"
       />
       <span>Edit</span>
     </div>

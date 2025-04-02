@@ -225,6 +225,32 @@ function App() {
     setContextOpen(false);
   };
 
+  const updateRemoveTag = (tagName: string) => {
+    /**
+     * FIrst I need to loop thorugh col headers to find columns that are Tag type
+     * So I am going to get the indexes of these columns. [2,3]
+     * Then I am going to loop through the rows. Getting the column at the tag array column.
+     * Check if the value is the tagName, then make the tag an eempty value
+     */
+
+    const tagIndexes = tableHeaders.map((element, index) => {
+      if (element.TYPE === TABLE_TYPE.TAG) {
+        return index;
+      }
+    });
+
+    const updated = [...tableRows];
+    updated.forEach((row) => {
+      row.values.forEach((element, index) => {
+        if (tagIndexes.includes(index) && row.values[index].value === tagName) {
+          row.values[index].value = "";
+          console.log("yah");
+        }
+      });
+    });
+    setTableRows(updated);
+  };
+
   console.log("App Component - SelectedRows:", selectedRows);
   console.log("App Component - Selected Table Headers:", selectedHeaders);
   console.log("App Component - TableHeadrs:", tableHeaders);
@@ -232,7 +258,7 @@ function App() {
 
   return (
     <>
-      <Navbar />
+      <Navbar tableHeaders={tableHeaders} tableRows={tableRows} />
       <div className="flex flex-row p-2">
         <TableContextMenu
           contextOpen={contextOpen}
@@ -252,6 +278,7 @@ function App() {
           setCoords={setCoords}
           selectedHeaders={selectedHeaders}
           setSelectedHeaders={setSelectedHeaders}
+          updateRemoveTag={updateRemoveTag}
         />
         <button
           className="rounded p-2 

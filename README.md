@@ -6,22 +6,29 @@ Future implementation is using Java + Spring or Kotlin + Spring.
 
 # Core Features
 
-~~- Add a row~~
+Frontend Features
 
-- Edit values inside rows
-  ~~--> Limit the values that can be added in the rows based on the column they are in~~
-  ~~- Delete rows~~
-  ~~- Delete columns~~
-  ~~- Add columns~~
-  ~~- Allow users to add, remove tags~~
-  --> if delete a tag, any rows that have the tag name should instead now have a blank tag
+- ~~- Add a row~~
+
+- ~~- Edit values inside rows~~
+
+  - ~~ Limit the values that can be added in the rows based on the column they are in~~
+
+- ~~Delete rows~~
+- ~~- Delete columns~~
+- ~~- Add columns~~
+- ~~- Allow users to add, remove tags~~
+- ~~if delete a tag, any rows that have the tag name should instead now have a blank tag~~
+- Save values into local storage
+- ~~Convert into CSV file~~
+- Login / Sign up
+
+Backend Features:
 
 ## Nice to have features
-
+- Convert Table into Context 
 - Add a shift-click to select multiple rows
-
 - Fix TableContextMenu tooltip open location
-
 - Add an enter button when editing a column
 - Fix the sizing of the columns to be about the same
 - Fix the sizing of the columns when editing data value
@@ -133,9 +140,41 @@ const removeRowsHeaders = () => {
 };
 ```
 
-Use <input type='radio'> or <select>?
+Use
 
-- Use <select> when you have a long list of items
+```html
+<input type="radio" /> or
+<select></select>
+```
+
+- Use when you have a long list of items
+
+Bug 2
+
+- Bug when deleting Tag, then the tag columns are now empty. When user tries to change the column tag, it will not trigger the editData() function
+
+Ok, so for a quick fix, I decidede to add an ```<option value ="" disabled>```` which would force the user to select a different tag so now it can trigger the editData()
+
+# Improvements / Self-Reflection
+
+If you can see, my code is a mess. One mess that stands out to me is prop-drilling. Observe from
+
+```
+  <App> -> <Table> -> <TableData> -> <TagForm>
+```
+
+I am passing props from App all the way down to its decensdants. In this case, using Context API would have been better.
+
+Secondly, I am passing SO MUCH functions to Table component. That is awful.
+
+The data structure of the rows is terrible.
+
+- Rows are array of objects.
+- Inside each object is a property called values.
+- Values is an array of objects again.
+
+I may have dones this because I wanted a row data to have an associated column and value
+Perhaps I did this because I wanted the ability to move columns around.
 
 # Progress Completion Date
 
@@ -157,9 +196,18 @@ Use <input type='radio'> or <select>?
 2025/03/15
 
 - Created TagForm
-- Created <select> tag with options for user to select a tag for a row
+- Created `<select>` tag with options for user to select a tag for a row
 
 2025/03/16
 
 - Added ability to delete tags ==> WIP to make tag columns blank if deleted a tag that has them
 - Added ability to add new tags
+
+2025/03/27
+
+- Updated Tag columns to blank if their Tag was deleted
+- Need to fix issue with bug when after deleting a tag, can not update the column with a new value
+
+2025/04/01
+
+- Added the ability to create a CSV file from data

@@ -9,6 +9,7 @@ function TableData({
   rowIndex,
   updateTableRows,
   isSelected,
+  updateRemoveTag,
 }) {
   const [currValue, setCurrValue] = useState(value);
   const [isEdit, setIsEdit] = useState(false);
@@ -24,7 +25,7 @@ function TableData({
    */
   const editData = (e) => {
     const value = e.target.value;
-    console.log(value);
+    console.log("selected value from TableData.tsx", value);
     setCurrValue(value);
     updateTableRows(colName, rowIndex, value);
   };
@@ -58,7 +59,8 @@ function TableData({
             handleEnterKeyDown={handleEnterKeyDown}
             editData={editData}
             value={currValue}
-            setIsEdit= {setIsEdit}
+            setIsEdit={setIsEdit}
+            updateRemoveTag={updateRemoveTag}
           />
         ) : (
           // <select value={currValue} onChange={editData} autoFocus>
