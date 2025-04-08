@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import DownloadBtn from "../../src/assets/download-solid-white.svg";
 
 function CSVBtn({ tableHeaders, tableRows }) {
   /**
@@ -45,9 +46,13 @@ function CSVBtn({ tableHeaders, tableRows }) {
   };
 
   return (
-    <button className="text-white hover:cursor-pointer" onClick={convertToCSV}>
+    <button
+      className="text-white hover:cursor-pointer w-10"
+      onClick={convertToCSV}
+      title="Download CSV File"
+    >
       <a href={""} ref={href}>
-        Download CSV File
+        <img src={DownloadBtn} alt="Download CSV File"></img>
       </a>
     </button>
   );

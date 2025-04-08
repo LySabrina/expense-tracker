@@ -56,7 +56,7 @@ function Table({
   // };
 
   return (
-    <table className="w-full p-4">
+    <table className="w-full p-4 overflow-x-scroll">
       <thead>
         <tr>
           <TableHeader name={"#"} />
