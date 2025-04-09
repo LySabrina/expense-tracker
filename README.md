@@ -4,6 +4,20 @@ Just a quick fun project to get familiar with TypeScript and React.
 Future implementation is using Java + Spring or Kotlin + Spring.
 ![Demo project](./public/Quick_Demo.png)
 
+# Table of Contents
+
+[Core Features](#core-features)
+
+- [Nice-To-Have Features](#nice-to-have-features)
+
+[Technical Improvements](#technical-improvements)
+
+[Roadblocks](#roadblocks)
+
+[Self-Reflection](#improvements--self-reflection)
+
+[Progress Dates](#progress-completion-date)
+
 # Core Features
 
 Frontend Features
@@ -12,7 +26,7 @@ Frontend Features
 
 - ~~- Edit values inside rows~~
 
-  - ~~ Limit the values that can be added in the rows based on the column they are in~~
+  ~~- Limit the values that can be added in the rows based on the column they are in~~
 
 - ~~Delete rows~~
 - ~~- Delete columns~~
@@ -25,8 +39,10 @@ Frontend Features
 
 Backend Features:
 
+-
+
 ## Nice to have features
-- Convert Table into Context 
+
 - Add a shift-click to select multiple rows
 - Fix TableContextMenu tooltip open location
 - Add an enter button when editing a column
@@ -34,7 +50,15 @@ Backend Features:
 - Fix the sizing of the columns when editing data value
 - Add the ability to delete column
 
-# Roadblock
+# Technical Improvements
+
+This is listing the technical improvements to be made. Not really any features related to the application
+
+- Move Table into TableContext to avoid prop drilling and stuffing everything into App
+
+# Roadblocks
+
+## Bug 1
 
 - I created a dialog inside a component. I had an issue in figuring how to open the dialog. If it wants to open, it is based on the right-click (or more known as the context menu ) that the first <td> column listens for.
 
@@ -149,11 +173,15 @@ Use
 
 - Use when you have a long list of items
 
-Bug 2
+## Bug 2
 
 - Bug when deleting Tag, then the tag columns are now empty. When user tries to change the column tag, it will not trigger the editData() function
 
 Ok, so for a quick fix, I decidede to add an ```<option value ="" disabled>```` which would force the user to select a different tag so now it can trigger the editData()
+
+## Issue 1
+
+As stated in the Improvements / Self-Reflection tab, I am doing a lot of prop-drilling and passing a lot of props to child components. Hence, I am interested in moving all of this passing props into a Context.
 
 # Improvements / Self-Reflection
 
@@ -211,3 +239,8 @@ Perhaps I did this because I wanted the ability to move columns around.
 2025/04/01
 
 - Added the ability to create a CSV file from data
+
+2025/04/08
+
+- Integrated React-Router for different pages
+- Created TableContext to encapsulate all things related to table (so it's not stuff into App.tsx and avoid prop drilling)

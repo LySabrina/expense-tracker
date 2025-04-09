@@ -74,6 +74,7 @@ function App() {
   const [selectedRows, setSelectedRows] = useState([]);
   const [selectedHeaders, setSelectedHeaders] = useState([]);
   const newColBtn = useRef(null); // ref returns a JS Object with a key called current
+
   const addNewCol = (newCol) => {
     setTableHeader((prevHeaders) => {
       return [...prevHeaders, newCol];
@@ -88,6 +89,7 @@ function App() {
     });
     setTableRows(updatedTableRows);
   };
+
   const openColForm = () => {
     newColBtn.current.showModal();
   };
