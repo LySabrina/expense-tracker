@@ -1,12 +1,10 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import TableData from "./TableData.js";
 import TableHeader from "./TableHeader.js";
 import { TABLE_TYPE } from "../constants/TABLE_TYPE.js";
+import { TableContext } from "../context/TableProvider.js";
 
 function Table({
-  tableHeaders,
-  tableRows,
-  updateTableRows,
   setSelectedRows,
   selectedRows,
   contextOpen,
@@ -14,8 +12,15 @@ function Table({
   setCoords,
   selectedHeaders,
   setSelectedHeaders,
-  updateRemoveTag
 }) {
+  const table = useContext(TableContext);
+  const [tableHeaders, setTableHeader] = table.tableHeaders;
+  const [tableRows, setTableRows] = table.tableRows;
+  const {
+    updateTableRows,
+    updateRemoveTag,
+  } = table;
+
   const selectRow = (rowIndex: number) => {
     if (selectedRows.includes(rowIndex)) {
       setSelectedRows((prevSelected) => {
@@ -50,10 +55,6 @@ function Table({
     });
     setContextOpen(true);
   };
-
-  // const closeContextMenu = (e) => {
-
-  // };
 
   return (
     <table className="w-full p-4 overflow-x-scroll">

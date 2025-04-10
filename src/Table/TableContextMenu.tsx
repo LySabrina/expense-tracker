@@ -1,4 +1,5 @@
-import { useEffect, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
+import { TableContext } from "../context/TableProvider";
 
 function TableContextMenu({
   contextOpen,
@@ -8,7 +9,6 @@ function TableContextMenu({
   removeRowsHeaders,
 }) {
   const dialog = useRef(null);
-
   useEffect(() => {
     open();
   }, [contextOpen, coords]);
@@ -20,6 +20,7 @@ function TableContextMenu({
       dialog.current.close();
     }
   };
+
   return (
     <dialog
       ref={dialog}

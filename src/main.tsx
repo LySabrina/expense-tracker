@@ -6,16 +6,19 @@ import "./index.css";
 import UserProfile from "./pages/UserProfile.tsx";
 import Navbar from "./components/Navbar.tsx";
 import TableProvider from "./context/TableProvider.tsx";
+import AuthProvider from "./context/AuthProvider.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <TableProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<App />} />
-          <Route path="/profile" element={<UserProfile />} />
-        </Routes>
-      </BrowserRouter>
-    </TableProvider>
+    <AuthProvider>
+      <TableProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<App />} />
+            <Route path="/profile" element={<UserProfile />} />
+          </Routes>
+        </BrowserRouter>
+      </TableProvider>
+    </AuthProvider>
   </StrictMode>
 );

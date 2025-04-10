@@ -151,8 +151,78 @@ export default function TableProvider({ children }) {
 
     setTableRows(filtered);
   };
+  const removeTableRows = (setSelectedRows, setContextOpen) => {
+    setTableRows((prevRows) => {
+      console.log("prevRows", prevRows);
+      const filterRows = prevRows.filter((rows, index) => {
+        if (!selectedRows.includes(index)) {
+          return rows;
+        }
+      });
+      console.log("Filter Rows - ", filterRows);
+      setSelectedRows([]);
+      setContextOpen(false);
+    });
+  };
 
-  
+  const removeTableHeaders = (setSelectedHeaders, setContextOpen) => {
+    const filterHeaders = tableHeaders.filter((element, index) => {
+      if (!selectedHeaders.includes(index)) {
+        return element;
+      }
+    });
+    setTableHeader(filterHeaders);
+
+    /**
+     * Some how this modifies the original array. THis is because using splice() will modify the original arrray
+     * so make a copy
+     */
+    const filter = tableRows.map((row) => {
+      // const tds = row.values; // wrong, it will reference to the original array, so make a copy instead
+      const tds = [...row.values];
+      tds.map((columns, index) => {
+        if (selectedHeaders.includes(index)) {
+          tds.splice(index, 1);
+        }
+      });
+      return { values: tds };
+    });
+    console.log("filty", filter);
+
+    setTableRows(filter);
+    setSelectedHeaders([]);
+    setContextOpen(false);
+  };
+
+   const updateRemoveTag = (tagName: string) => {
+     /**
+      * FIrst I need to loop thorugh col headers to find columns that are Tag type
+      * So I am going to get the indexes of these columns. [2,3]
+      * Then I am going to loop through the rows. Getting the column at the tag array column.
+      * Check if the value is the tagName, then make the tag an eempty value
+      */
+
+     const tagIndexes = tableHeaders.map((element, index) => {
+       if (element.TYPE === TABLE_TYPE.TAG) {
+         return index;
+       }
+     });
+
+     const updated = [...tableRows];
+     updated.forEach((row) => {
+       row.values.forEach((element, index) => {
+         if (
+           tagIndexes.includes(index) &&
+           row.values[index].value === tagName
+         ) {
+           row.values[index].value = "";
+           console.log("yah");
+         }
+       });
+     });
+     setTableRows(updated);
+   };
+
   return (
     <TableContext.Provider
       value={{
@@ -161,6 +231,10 @@ export default function TableProvider({ children }) {
         addNewCol: addNewCol,
         addNewRows: addNewRows,
         updateTableRows: updateTableRows,
+        removeRowsHeaders: removeRowsHeaders,
+        removeTableRows: removeTableRows,
+        removeTableHeaders: removeTableHeaders,
+        updateRemoveTag : updateRemoveTag
       }}
     >
       {children}

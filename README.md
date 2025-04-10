@@ -244,3 +244,8 @@ Perhaps I did this because I wanted the ability to move columns around.
 
 - Integrated React-Router for different pages
 - Created TableContext to encapsulate all things related to table (so it's not stuff into App.tsx and avoid prop drilling)
+
+2025/04/09
+
+- Working on AuthContext to determine if user is logged in
+- Preparing MySQL
