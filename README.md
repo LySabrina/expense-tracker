@@ -249,3 +249,7 @@ Perhaps I did this because I wanted the ability to move columns around.
 
 - Working on AuthContext to determine if user is logged in
 - Preparing MySQL
+
+2025/04/10
+- Created function queries for MySQL
+- Created User table

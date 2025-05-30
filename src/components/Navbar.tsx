@@ -7,7 +7,7 @@ import { AuthContext } from "../context/AuthProvider";
 function Navbar({ tableHeaders, tableRows }) {
   const auth = useContext(AuthContext);
   const { isLoggedIn, setIsLoggedIn } = auth;
-  
+
   return (
     <nav className="bg-dark-black p-2 flex justify-between">
       <div>
@@ -23,7 +23,7 @@ function Navbar({ tableHeaders, tableRows }) {
                 <img src={UserBlack} alt="Login" className="w-10" />
               </Link>
             ) : (
-              <Link to={"/login"}>
+              <Link to={""}>
                 <img src={UserBlack} alt="Login" className="" />
                 Login
               </Link>
